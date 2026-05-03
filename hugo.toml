@@ -3,6 +3,7 @@ locale = 'en-us'
 title = 'SneferuBlog'
 theme = "blowfish"
 
+
 [menu]
   [[menu.main]]
     identifier = "maldev"
@@ -27,3 +28,4 @@ theme = "blowfish"
   showRecent = true      # This is the magic switch
   recentLimit = 5        # How many posts to show on the main page
   showRecentItems = true
+  math = true
