@@ -1,4 +1,23 @@
 baseURL = "https://Sneferu777.github.io/operator-blog/"
 locale = 'en-us'
 title = 'My New Hugo Project'
-theme = "PaperMod"
+theme = "blowfish"
+
+[menu]
+  [[menu.main]]
+    identifier = "maldev"
+    name = "Malware Dev"
+    url = "/categories/malware/"
+    weight = 10
+
+  [[menu.main]]
+    identifier = "ad"
+    name = "Active Directory"
+    url = "/categories/active-directory/"
+    weight = 20
+
+  [[menu.main]]
+    identifier = "websec"
+    name = "Web Security"
+    url = "/categories/websec/"
+    weight = 30
