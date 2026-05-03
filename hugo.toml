@@ -1,6 +1,6 @@
 baseURL = "https://Sneferu777.github.io/operator-blog/"
 locale = 'en-us'
-title = 'My New Hugo Project'
+title = 'SneferuBlog'
 theme = "blowfish"
 
 [menu]
@@ -21,3 +21,9 @@ theme = "blowfish"
     name = "Web Security"
     url = "/categories/websec/"
     weight = 30
+
+[params.homepage]
+  layout = "profile"
+  showRecent = true      # This is the magic switch
+  recentLimit = 5        # How many posts to show on the main page
+  showRecentItems = true
