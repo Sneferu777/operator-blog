@@ -29,3 +29,22 @@ theme = "blowfish"
   recentLimit = 5        # How many posts to show on the main page
   showRecentItems = true
   math = true
+
+
+[params.author]
+  name = "Sneferu"
+  image = "images/sneferu.jpeg"
+  headline = "Red Teamer & Malware Dev"
+  bio = "Diving deep into Windows Internals and C++ exploitation."
+  links = [
+    { github = "https://github.com/Sneferu777" },
+    { linkedin = "https://linkedin.com/in/yourprofile" }
+  ]
+
+[security]
+  enableInlineShortcodes = true
+  [security.http]
+    methods = ['(?i)GET|POST']
+    urls = ['.*']
+  [security.funcs]
+    getenv = ['^HUGO_', '^CI$']
