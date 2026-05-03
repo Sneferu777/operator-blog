@@ -1,0 +1,4 @@
+baseURL = "https://Sneferu777.github.io/operator-blog/"
+locale = 'en-us'
+title = 'My New Hugo Project'
+theme = "PaperMod"
