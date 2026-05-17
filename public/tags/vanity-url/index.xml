@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vanity URL on SneferuBlog</title>
+    <link>http://localhost:1313/operator-blog/tags/vanity-url/</link>
+    <description>Recent content in Vanity URL on SneferuBlog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© 2026 Sneferu</copyright>
+    <lastBuildDate>Mon, 04 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/operator-blog/tags/vanity-url/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Demystifying the Dark Web Part 3: Cryptographic Identity</title>
+      <link>http://localhost:1313/operator-blog/posts/dark-web-part-3/</link>
+      <pubDate>Mon, 04 May 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/operator-blog/posts/dark-web-part-3/</guid>
+      <description>&lt;h2 class=&#34;relative group&#34;&gt;🛠️ The Brute Force Setup: Mining Identity&#xA;    &lt;div id=&#34;-the-brute-force-setup-mining-identity&#34; class=&#34;anchor&#34;&gt;&lt;/div&gt;&#xA;    &#xA;    &lt;span&#xA;        class=&#34;absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none&#34;&gt;&#xA;        &lt;a class=&#34;text-primary-300 dark:text-neutral-700 !no-underline&#34; href=&#34;#-the-brute-force-setup-mining-identity&#34; aria-label=&#34;Anchor&#34;&gt;#&lt;/a&gt;&#xA;    &lt;/span&gt;&#xA;    &#xA;&lt;/h2&gt;&#xA;&lt;blockquote&gt;&lt;p&gt;&lt;figure&gt;&lt;img&#xA;    class=&#34;my-0 rounded-md&#34;&#xA;    loading=&#34;lazy&#34;&#xA;    decoding=&#34;async&#34;&#xA;    fetchpriority=&#34;auto&#34;&#xA;    alt=&#34;Brute Force Generation Speed&#34;&#xA;    width=&#34;876&#34;&#xA;    height=&#34;285&#34;&#xA;    src=&#34;http://localhost:1313/operator-blog/posts/dark-web-part-3/feature_hu_a17f81885ba64239.png&#34;&#xA;    srcset=&#34;http://localhost:1313/operator-blog/posts/dark-web-part-3/feature_hu_a17f81885ba64239.png 800w, http://localhost:1313/operator-blog/posts/dark-web-part-3/feature.png 1280w&#34;&#xA;    sizes=&#34;(min-width: 768px) 50vw, 65vw&#34;&#xA;    data-zoom-src=&#34;http://localhost:1313/operator-blog/posts/dark-web-part-3/feature.png&#34;&gt;&lt;figcaption&gt;mkp224o calculation results&lt;/figcaption&gt;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;Unlike the clearnet, where you &amp;ldquo;rent&amp;rdquo; a domain from a central registrar like GoDaddy or Namecheap, an onion address is mined. It is a cryptographic discovery. To own an address that starts with a specific string, you have to iterate through billions of random key pairs until the math aligns. It is a raw expenditure of CPU cycles to prove ownership.&lt;/strong&gt;&lt;/p&gt;</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/operator-blog/posts/dark-web-part-3/feature.png" />
+    </item>
+    
+  </channel>
+</rss>

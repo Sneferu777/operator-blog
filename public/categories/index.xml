@@ -2,19 +2,59 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on SneferuBlog</title>
-    <link>https://Sneferu777.github.io/operator-blog/categories/</link>
+    <link>http://localhost:1313/operator-blog/categories/</link>
     <description>Recent content in Categories on SneferuBlog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© 2026 Sneferu</copyright>
-    <lastBuildDate>Sun, 03 May 2026 18:00:00 +0100</lastBuildDate><atom:link href="https://Sneferu777.github.io/operator-blog/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 04 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/operator-blog/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Cryptography</title>
+      <link>http://localhost:1313/operator-blog/categories/cryptography/</link>
+      <pubDate>Mon, 04 May 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/operator-blog/categories/cryptography/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Networks</title>
+      <link>http://localhost:1313/operator-blog/categories/networks/</link>
+      <pubDate>Mon, 04 May 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/operator-blog/categories/networks/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>OpSec</title>
+      <link>http://localhost:1313/operator-blog/categories/opsec/</link>
+      <pubDate>Mon, 04 May 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/operator-blog/categories/opsec/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Privacy &amp; Anonymity</title>
+      <link>http://localhost:1313/operator-blog/categories/privacy--anonymity/</link>
+      <pubDate>Mon, 04 May 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/operator-blog/categories/privacy--anonymity/</guid>
+      <description></description>
+      
+    </item>
     
     <item>
       <title>Malware</title>
-      <link>https://Sneferu777.github.io/operator-blog/categories/malware/</link>
+      <link>http://localhost:1313/operator-blog/categories/malware/</link>
       <pubDate>Sun, 03 May 2026 18:00:00 +0100</pubDate>
       
-      <guid>https://Sneferu777.github.io/operator-blog/categories/malware/</guid>
+      <guid>http://localhost:1313/operator-blog/categories/malware/</guid>
       <description></description>
       
     </item>

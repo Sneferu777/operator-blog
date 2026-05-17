@@ -11,6 +11,7 @@ theme = "blowfish"
     url = "/categories/malware/"
     weight = 10
 
+
   [[menu.main]]
     identifier = "ad"
     name = "Active Directory"
@@ -22,6 +23,12 @@ theme = "blowfish"
     name = "Web Security"
     url = "/categories/websec/"
     weight = 30
+
+  [[menu.main]]
+   identifier = "networks"
+   name = "Networks Sec"
+   url = "/categories/networks/"
+   weight = 40
 
 [params.homepage]
   layout = "profile"
@@ -48,3 +55,14 @@ theme = "blowfish"
     urls = ['.*']
   [security.funcs]
     getenv = ['^HUGO_', '^CI$']
+
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+  series = "series"  # <--- Add this line
+  author = "authors"
+
+[params]
+  showCodeCopyButton = true
+  math = true

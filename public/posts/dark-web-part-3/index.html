@@ -1,0 +1,1535 @@
+<!doctype html>
+<html
+  lang="en-us"
+  dir="ltr"
+  class="scroll-smooth"
+  data-default-appearance="light"
+  data-auto-appearance="true"><head><script src="/operator-blog/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=operator-blog/livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  
+    <meta http-equiv="content-language" content="en-us">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color">
+
+  
+  
+    <title>Demystifying the Dark Web Part 3: Cryptographic Identity &middot; SneferuBlog</title>
+    <meta name="title" content="Demystifying the Dark Web Part 3: Cryptographic Identity &middot; SneferuBlog">
+  
+
+  
+  
+  
+    <meta name="keywords" content="Ed25519,Hashing,Vanity URL,C&#43;&#43;,">
+  
+  
+  
+  <link rel="canonical" href="http://localhost:1313/operator-blog/posts/dark-web-part-3/">
+  
+  
+
+  
+  
+    <meta name="author" content="Sneferu">
+  
+  
+    
+      
+        
+          <link href="https://github.com/Sneferu777" rel="me">
+        
+      
+    
+      
+        
+          <link href="https://linkedin.com/in/yourprofile" rel="me">
+        
+      
+    
+  
+
+  
+  <meta property="og:url" content="http://localhost:1313/operator-blog/posts/dark-web-part-3/">
+  <meta property="og:site_name" content="SneferuBlog">
+  <meta property="og:title" content="Demystifying the Dark Web Part 3: Cryptographic Identity">
+  <meta property="og:description" content="🛠️ The Brute Force Setup: Mining Identity # mkp224o calculation results Unlike the clearnet, where you “rent” a domain from a central registrar like GoDaddy or Namecheap, an onion address is mined. It is a cryptographic discovery. To own an address that starts with a specific string, you have to iterate through billions of random key pairs until the math aligns. It is a raw expenditure of CPU cycles to prove ownership.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-05-04T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-05-04T00:00:00+00:00">
+    <meta property="article:tag" content="Ed25519">
+    <meta property="article:tag" content="Hashing">
+    <meta property="article:tag" content="Vanity URL">
+    <meta property="article:tag" content="C&#43;&#43;">
+    <meta property="og:image" content="http://localhost:1313/operator-blog/posts/dark-web-part-3/feature.png">
+      <meta property="og:see_also" content="http://localhost:1313/operator-blog/posts/dark-web-part1/">
+      <meta property="og:see_also" content="http://localhost:1313/operator-blog/posts/dark-web-part-2/">
+      <meta property="og:see_also" content="http://localhost:1313/operator-blog/posts/dark-web-part-4/">
+
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/operator-blog/posts/dark-web-part-3/feature.png">
+  <meta name="twitter:title" content="Demystifying the Dark Web Part 3: Cryptographic Identity">
+  <meta name="twitter:description" content="🛠️ The Brute Force Setup: Mining Identity # mkp224o calculation results Unlike the clearnet, where you “rent” a domain from a central registrar like GoDaddy or Namecheap, an onion address is mined. It is a cryptographic discovery. To own an address that starts with a specific string, you have to iterate through billions of random key pairs until the math aligns. It is a raw expenditure of CPU cycles to prove ownership.">
+
+  
+  
+  
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+  
+    
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <link
+    type="text/css"
+    rel="stylesheet"
+    href="/operator-blog/css/main.bundle.min.07a8088c33086a4f22f8c0e9b9dd8b3d24774753ce35a341034d6f7c1e249b72e184af812c1341e6a62df443da9e4bb28feddf7f5c6f07b24a20a900ef559483.css"
+    integrity="sha512-B6gIjDMIak8i&#43;MDpud2LPSR3R1PONaNBA01vfB4km3LhhK&#43;BLBNB5qYt9EPankuyj&#43;3ff1xvB7JKIKkA71WUgw==">
+
+  
+  
+  <script
+    type="text/javascript"
+    src="/operator-blog/js/appearance.min.6f41174b3a05b680820fe08cadbfa5fb7a7ca347b76a0955cdc68b9d8aca1ce24f0547e138cea33bcc7904d551a90afcb1cc7f2d9fe8557075d501419046c08c.js"
+    integrity="sha512-b0EXSzoFtoCCD&#43;CMrb&#43;l&#43;3p8o0e3aglVzcaLnYrKHOJPBUfhOM6jO8x5BNVRqQr8scx/LZ/oVXB11QFBkEbAjA=="></script>
+  
+  
+  
+  
+  
+  
+    
+    <script src="/operator-blog/lib/zoom/zoom.min.umd.a527109b68c082a70f3697716dd72a9d5aa8b545cf800cecbbc7399f2ca6f6e0ce3e431f2062b48bbfa47c9ea42822714060bef309be073f49b9c0e30d318d7b.js" integrity="sha512-pScQm2jAgqcPNpdxbdcqnVqotUXPgAzsu8c5nyym9uDOPkMfIGK0i7&#43;kfJ6kKCJxQGC&#43;8wm&#43;Bz9JucDjDTGNew=="></script>
+  
+
+  
+  
+  
+    
+  
+  
+    
+  
+  
+  
+  
+  
+  
+  
+    
+    <script
+      defer
+      type="text/javascript"
+      id="script-bundle"
+      src="/operator-blog/js/main.bundle.min.0fa2a78284c4ed567ca02f5c37008b7b0127c3081f48b033f1c537c24766b8d57da49e0316c193c94bfd77da998acb9863844e045800340b2303522672e1ac79.js"
+      integrity="sha512-D6KngoTE7VZ8oC9cNwCLewEnwwgfSLAz8cU3wkdmuNV9pJ4DFsGTyUv9d9qZisuYY4ROBFgANAsjA1ImcuGseQ=="
+      data-copy="Copy"
+      data-copied="Copied"></script>
+  
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+  <link
+    type="text/css"
+    rel="stylesheet"
+    href="/operator-blog/lib/katex/katex.min.7145427311abfe1e820c33f8dd1df93294bcf251fe80c8eb8328e9410d80c09ed01fbad3ea7d22ccd371d047adeccf655182c3447454a755816915d4747ad42c.css"
+    integrity="sha512-cUVCcxGr/h6CDDP43R35MpS88lH&#43;gMjrgyjpQQ2AwJ7QH7rT6n0izNNx0Eet7M9lUYLDRHRUp1WBaRXUdHrULA==">
+  
+  
+  
+  <script
+    defer
+    type="text/javascript"
+    src="/operator-blog/js/katex.bundle.fb416df2aa1d76bf7beea158d2c5b760dfb7f801a8b34dc834deac18e169f7f2017de695e0dda839665893495c05c2372ab7064c9c71b047a9d7c2f8edb96ca6.js"
+    integrity="sha512-&#43;0Ft8qoddr977qFY0sW3YN&#43;3&#43;AGos03INN6sGOFp9/IBfeaV4N2oOWZYk0lcBcI3KrcGTJxxsEep18L47blspg=="
+    id="katex-render"></script>
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="/operator-blog/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/operator-blog/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/operator-blog/favicon-16x16.png">
+    <link rel="manifest" href="/operator-blog/site.webmanifest">
+  
+
+  
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Posts",
+    "name": "Demystifying the Dark Web Part 3: Cryptographic Identity",
+    "headline": "Demystifying the Dark Web Part 3: Cryptographic Identity",
+    
+    "inLanguage": "en-us",
+    "url" : "http://localhost:1313/operator-blog/posts/dark-web-part-3/",
+    "author" : {
+      "@type": "Person",
+      "name": "Sneferu"
+    },
+    "copyrightYear": "2026",
+    "dateCreated": "2026-05-04T00:00:00\u002b00:00",
+    "datePublished": "2026-05-04T00:00:00\u002b00:00",
+    
+    "dateModified": "2026-05-04T00:00:00\u002b00:00",
+    
+    "keywords": ["Ed25519","Hashing","Vanity URL","C++"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "1038"
+  }]
+  </script>
+
+
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <body class="flex flex-col h-screen m-auto leading-7 max-w-7xl px-6 sm:px-14 md:px-24 lg:px-32 text-lg bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral bf-scrollbar">
+    <div id="the-top" class="absolute flex self-center">
+      <a
+        class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600"
+        href="#main-content">
+        <span class="font-bold text-primary-600 pe-2 dark:text-primary-400">&darr;</span>
+        Skip to main content
+      </a>
+    </div>
+    
+    
+      <div class="main-menu flex items-center w-full gap-2 p-1 pl-0">
+  
+  
+    <a href="/operator-blog/" class="text-base font-medium truncate min-w-0 shrink">
+      SneferuBlog
+    </a>
+  
+  <div class="flex items-center ms-auto">
+    <div class="hidden md:flex">
+      <nav class="flex items-center gap-x-5 h-12">
+  
+    
+      
+  
+    <a
+      href="/operator-blog/categories/malware/"
+      
+      class="flex items-center bf-icon-color-hover"
+      aria-label="Malware Dev"
+      title="">
+      
+      
+        <span class="text-base font-medium break-normal">
+          Malware Dev
+        </span>
+      
+    </a>
+  
+
+    
+      
+  
+    <a
+      href="/operator-blog/categories/active-directory/"
+      
+      class="flex items-center bf-icon-color-hover"
+      aria-label="Active Directory"
+      title="">
+      
+      
+        <span class="text-base font-medium break-normal">
+          Active Directory
+        </span>
+      
+    </a>
+  
+
+    
+      
+  
+    <a
+      href="/operator-blog/categories/websec/"
+      
+      class="flex items-center bf-icon-color-hover"
+      aria-label="Web Security"
+      title="">
+      
+      
+        <span class="text-base font-medium break-normal">
+          Web Security
+        </span>
+      
+    </a>
+  
+
+    
+      
+  
+    <a
+      href="/operator-blog/categories/networks/"
+      
+      class="flex items-center bf-icon-color-hover"
+      aria-label="Networks Sec"
+      title="">
+      
+      
+        <span class="text-base font-medium break-normal">
+          Networks Sec
+        </span>
+      
+    </a>
+  
+
+    
+  
+
+  
+
+  
+
+  
+    <button
+      id="search-button"
+      aria-label="Search"
+      class="text-base bf-icon-color-hover"
+      title="Search (/)">
+      <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span>
+    </button>
+  
+
+  
+    <div class="flex items-center">
+      <button
+        id="appearance-switcher"
+        aria-label="Dark mode switcher"
+        type="button"
+        class="text-base bf-icon-color-hover">
+        <div class="flex items-center justify-center dark:hidden">
+          <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
+</span>
+        </div>
+        <div class="items-center justify-center hidden dark:flex">
+          <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
+</span>
+        </div>
+      </button>
+    </div>
+  
+</nav>
+
+
+
+    </div>
+    <div class="flex md:hidden">
+      <div class="flex items-center h-14 gap-4">
+  
+    <button
+      id="search-button-mobile"
+      aria-label="Search"
+      class="flex items-center justify-center bf-icon-color-hover"
+      title="Search (/)">
+      <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span>
+    </button>
+  
+
+  
+    <button
+      id="appearance-switcher-mobile"
+      type="button"
+      aria-label="Dark mode switcher"
+      class="flex items-center justify-center text-neutral-900 hover:text-primary-600 dark:text-neutral-200 dark:hover:text-primary-400">
+      <div class="dark:hidden">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
+</span>
+      </div>
+      <div class="hidden dark:block">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
+</span>
+      </div>
+    </button>
+  
+
+  
+    <input type="checkbox" id="mobile-menu-toggle" autocomplete="off" class="hidden peer">
+    <label for="mobile-menu-toggle" class="flex items-center justify-center cursor-pointer bf-icon-color-hover">
+      <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"/></svg>
+</span>
+    </label>
+
+    <div
+      role="dialog"
+      aria-modal="true"
+      style="scrollbar-gutter: stable;"
+      class="fixed inset-0 z-50 invisible overflow-y-auto px-6 py-20 opacity-0 transition-[opacity,visibility] duration-300 peer-checked:visible peer-checked:opacity-100 bg-neutral-50/97 dark:bg-neutral-900/99
+      bf-scrollbar">
+      <label
+        for="mobile-menu-toggle"
+        class="fixed end-8 top-5 flex items-center justify-center z-50 h-12 w-12 cursor-pointer select-none rounded-full bf-icon-color-hover border bf-border-color bf-border-color-hover bg-neutral-50 dark:bg-neutral-900">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+</span>
+      </label>
+      <nav class="mx-auto max-w-md space-y-6">
+        
+  
+    
+    <div class="px-2">
+      <a
+        href="/operator-blog/categories/malware/"
+        aria-label="Malware Dev"
+        
+        class="flex items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
+        
+        <span title="" class="text-2xl font-bold tracking-tight">
+          Malware Dev
+        </span>
+        
+      </a>
+
+      
+    </div>
+  
+    
+    <div class="px-2">
+      <a
+        href="/operator-blog/categories/active-directory/"
+        aria-label="Active Directory"
+        
+        class="flex items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
+        
+        <span title="" class="text-2xl font-bold tracking-tight">
+          Active Directory
+        </span>
+        
+      </a>
+
+      
+    </div>
+  
+    
+    <div class="px-2">
+      <a
+        href="/operator-blog/categories/websec/"
+        aria-label="Web Security"
+        
+        class="flex items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
+        
+        <span title="" class="text-2xl font-bold tracking-tight">
+          Web Security
+        </span>
+        
+      </a>
+
+      
+    </div>
+  
+    
+    <div class="px-2">
+      <a
+        href="/operator-blog/categories/networks/"
+        aria-label="Networks Sec"
+        
+        class="flex items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
+        
+        <span title="" class="text-2xl font-bold tracking-tight">
+          Networks Sec
+        </span>
+        
+      </a>
+
+      
+    </div>
+  
+
+        
+  
+
+        
+  
+
+      </nav>
+    </div>
+  
+</div>
+
+
+
+
+
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+    
+    <div class="relative flex flex-col grow">
+      <main id="main-content" class="grow">
+        
+  
+  <article>
+    
+    
+
+    
+    <header id="single_header" class="mt-5 max-w-prose">
+      
+      <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+        Demystifying the Dark Web Part 3: Cryptographic Identity
+      </h1>
+      <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+        
+
+
+
+
+
+  
+  
+
+
+
+  
+
+  
+  
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <div class="flex flex-row flex-wrap items-center">
+    
+    
+      <time datetime="2026-05-04T00:00:00&#43;00:00">May 4, 2026</time><span class="px-2 text-primary-500">&middot;</span><span>1038 words</span><span class="px-2 text-primary-500">&middot;</span><span title="Reading time">5 mins</span>
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  
+
+
+      </div>
+      
+        
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+    
+    
+<div class="flex author">
+  
+    
+    
+      
+    
+    
+      
+      
+      
+        
+        
+        
+      
+      <img
+        class="!mt-0 !mb-0 h-24 w-24 rounded-full me-4"
+        width="96"
+        height="96"
+        alt="Sneferu"
+        src="/operator-blog/images/sneferu_hu_29ae5927f5b28e64.jpeg"
+        data-zoom-src="/operator-blog/images/sneferu_hu_82a65b9429fdfc9d.jpeg">
+    
+  
+  <div class="place-self-center">
+    
+      <div class="text-[0.6rem] uppercase leading-3 text-neutral-500 dark:text-neutral-400">
+        Author
+      </div>
+      <div class="font-semibold leading-6 text-neutral-800 dark:text-neutral-300">
+        Sneferu
+      </div>
+    
+    
+      <div class="text-sm text-neutral-700 dark:text-neutral-400">Diving deep into Windows Internals and C++ exploitation.</div>
+    
+    <div class="text-2xl sm:text-lg">
+  <div class="flex flex-wrap text-neutral-400 dark:text-neutral-500 space-x-2">
+    
+      
+        
+        <a
+          class=" hover:text-primary-700 dark:hover:text-primary-400"
+          href="https://github.com/Sneferu777"
+          
+          target="_blank"
+          aria-label="Github"
+          title="Github"
+          rel="me noopener noreferrer"
+          ><span class="inline-block align-text-bottom"><span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+</span></span></a
+        >
+      
+    
+      
+        
+        <a
+          class=" hover:text-primary-700 dark:hover:text-primary-400"
+          href="https://linkedin.com/in/yourprofile"
+          
+          target="_blank"
+          aria-label="Linkedin"
+          title="Linkedin"
+          rel="me noopener noreferrer"
+          ><span class="inline-block align-text-bottom"><span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+</span></span></a
+        >
+      
+    
+  </div>
+
+</div>
+  </div>
+</div>
+
+  
+
+  
+
+  
+    <div class="mb-5"></div>
+  
+
+      
+    </header>
+
+    
+    <section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
+      
+      
+      
+      
+      
+
+
+      <div class="min-w-0 min-h-0 max-w-fit">
+        
+  <details
+    class="mt-2 mb-5 overflow-hidden rounded-lg ms-0 ps-5"
+    >
+    
+  <summary
+    class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 -ms-5 ps-5 dark:bg-primary-800 dark:text-neutral-100">
+    Demystifying the Dark Web -
+    This article is part of a series.
+  </summary>
+  
+  
+    
+      <div
+        class="py-1 border-dotted border-neutral-300 border-s-1 -ms-5 ps-5 dark:border-neutral-600">
+        <a href="/operator-blog/posts/dark-web-part1/">
+          Part 1:
+          Demystifying the Dark Web Part 1: The Invisible Iceberg
+        </a>
+      </div>
+    
+  
+    
+      <div
+        class="py-1 border-dotted border-neutral-300 border-s-1 -ms-5 ps-5 dark:border-neutral-600">
+        <a href="/operator-blog/posts/dark-web-part-2/">
+          Part 2:
+          Demystifying the Dark Web Part 2: The Onion Handshake
+        </a>
+      </div>
+    
+  
+    
+      <div
+        class="py-1 border-dotted border-neutral-300 border-s-1 -ms-5 ps-5 dark:border-neutral-600">
+        Part 3:
+        This Article
+      </div>
+    
+  
+    
+      <div
+        class="py-1 border-dotted border-neutral-300 border-s-1 -ms-5 ps-5 dark:border-neutral-600">
+        <a href="/operator-blog/posts/dark-web-part-4/">
+          Part 4:
+          Demystifying the Dark Web Part 4: The Operator&#39;s Grave
+        </a>
+      </div>
+    
+  
+
+
+  </details>
+
+
+        <div class="article-content max-w-prose mb-20">
+          
+
+
+<h2 class="relative group">🛠️ The Brute Force Setup: Mining Identity
+    <div id="-the-brute-force-setup-mining-identity" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#-the-brute-force-setup-mining-identity" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<blockquote><p><figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="auto"
+    alt="Brute Force Generation Speed"
+    width="876"
+    height="285"
+    src="/operator-blog/posts/dark-web-part-3/feature_hu_a17f81885ba64239.png"
+    srcset="/operator-blog/posts/dark-web-part-3/feature_hu_a17f81885ba64239.png 800w, /operator-blog/posts/dark-web-part-3/feature.png 1280w"
+    sizes="(min-width: 768px) 50vw, 65vw"
+    data-zoom-src="/operator-blog/posts/dark-web-part-3/feature.png"><figcaption>mkp224o calculation results</figcaption></figure>
+
+<strong>Unlike the clearnet, where you &ldquo;rent&rdquo; a domain from a central registrar like GoDaddy or Namecheap, an onion address is mined. It is a cryptographic discovery. To own an address that starts with a specific string, you have to iterate through billions of random key pairs until the math aligns. It is a raw expenditure of CPU cycles to prove ownership.</strong></p>
+</blockquote><hr>
+
+<h2 class="relative group">The URL is the Key: Ed25519 Architecture
+    <div id="the-url-is-the-key-ed25519-architecture" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#the-url-is-the-key-ed25519-architecture" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p>In Tor v3, your <code>.onion</code> address isn&rsquo;t just a label—it is a <strong>Self-Authenticating Cryptographic Identifier</strong>. It is derived directly from an <strong>Ed25519 Public Key</strong>.</p>
+<p>A 56-character v3 address is a Base32-encoded string consisting of:</p>
+<ol>
+<li><strong>The Public Key:</strong> 32 bytes.</li>
+<li><strong>The Checksum:</strong> 2 bytes.</li>
+<li><strong>The Version Byte:</strong> 1 byte (<code>0x03</code>).</li>
+</ol>
+
+<h3 class="relative group">The Hashing Logic
+    <div id="the-hashing-logic" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#the-hashing-logic" aria-label="Anchor">#</a>
+    </span>
+    
+</h3>
+<p>The checksum is calculated as follows:
+$$
+\text{Checksum} = \text{SHA3-256}( \text{&quot;.onion checksum&quot;} \parallel \text{PublicKey} \parallel \text{Version} )
+$$</p>
+<p>By smashing these together and encoding them in <strong>Base32</strong>, we get the final URL.</p>
+<hr>
+
+<h2 class="relative group">The Probability of Vanity
+    <div id="the-probability-of-vanity" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#the-probability-of-vanity" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p>As an operator, you don&rsquo;t want a random string like <code>vww6ybal...</code>. You want a brand. But because the address is a hash, you have to play the <strong>Probability Game</strong>.</p>
+<p>The average number of attempts $N$ required to find an $n$-character prefix in Base32 is:
+$$N = 32^n$$</p>
+<p>For a 7-character prefix like <code>sneferu</code>:
+$$32^7 = 34,359,738,368 \text{ attempts}$$</p>
+<p>On a modern CPU (like your Arch machine), this might take 1–3 hours. For a 12-character prefix, you’d need a server farm for several years. This is why you see &ldquo;official&rdquo; onion sites with only the first few letters being readable.</p>
+<hr>
+
+<h2 class="relative group">💻 C++ Operator Logic
+    <div id="-c-operator-logic" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#-c-operator-logic" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">#include&lt;iostream&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include&lt;cstring&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include&lt;arpa/inet.h&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include&lt;sys/socket.h&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include&lt;string&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include&lt;vector&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include&lt;unistd.h&gt;
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TorOperator</span> { 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Connects throught the local Tor proxy (default 9050 or 9150)
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> Connect(<span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>string<span style="color:#f92672">&amp;</span> onion_url, <span style="color:#66d9ef">int</span> port){
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">int</span> sock <span style="color:#f92672">=</span> socket(AF_INET, SOCK_STREAM, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span>(sock <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">//1. Target Proxy
+</span></span></span><span style="display:flex;"><span>		sockaddr_in proxy;
+</span></span><span style="display:flex;"><span>		proxy.sin_family <span style="color:#f92672">=</span> AF_INET;
+</span></span><span style="display:flex;"><span>		proxy.sin_port <span style="color:#f92672">=</span> htons(<span style="color:#ae81ff">9050</span>); <span style="color:#75715e">//Standard Tor SOCKS Port
+</span></span></span><span style="display:flex;"><span>					      
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">//inet_addr is ancient and deprecated. It doesn&#39;t handle errors well (it returns -1 on failure, but 255.255.255.255 is also -1).
+</span></span></span><span style="display:flex;"><span>		<span style="color:#75715e">//inet_pton stands for &#34;Presentation to Network.&#34; It’s safer, more modern, and it supports IPv6 if you ever need it (AF_INET6). It’s the &#34;Pro&#34; way to write networking code in 2026.
+</span></span></span><span style="display:flex;"><span>		inet_pton(AF_INET, <span style="color:#e6db74">&#34;127.0.0.1&#34;</span>, <span style="color:#f92672">&amp;</span>proxy.sin_addr);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span>(connect(sock, (<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">sockaddr</span><span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>proxy, <span style="color:#66d9ef">sizeof</span>(proxy)) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> ){
+</span></span><span style="display:flex;"><span>			close(sock); 
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">//2. SOCKS5 Greeting
+</span></span></span><span style="display:flex;"><span>		<span style="color:#75715e">// [ Version 5, 1 Method, No Auth ]
+</span></span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">uint8_t</span> greeting[] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0x05</span>, <span style="color:#ae81ff">0x01</span>, <span style="color:#ae81ff">0x00</span>}; 
+</span></span><span style="display:flex;"><span>		send(sock, greeting, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">uint8_t</span> response[<span style="color:#ae81ff">2</span>];
+</span></span><span style="display:flex;"><span>		recv(sock, response, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (response[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0x00</span>) <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; <span style="color:#75715e">//Auth rejected
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// The Connection Request 
+</span></span></span><span style="display:flex;"><span>		<span style="color:#75715e">// [ Ver 5, CMD Connect, Reserved, ATYP Domain ]
+</span></span></span><span style="display:flex;"><span>		std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">uint8_t</span><span style="color:#f92672">&gt;</span> request <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0x05</span>, <span style="color:#ae81ff">0x01</span>, <span style="color:#ae81ff">0x00</span>, <span style="color:#ae81ff">0x03</span>};
+</span></span><span style="display:flex;"><span>		request.push_back(<span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">uint8_t</span><span style="color:#f92672">&gt;</span>(onion_url.length()));
+</span></span><span style="display:flex;"><span>		request.insert(request.end(), onion_url.begin(), onion_url.end());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">uint16_t</span> p <span style="color:#f92672">=</span> htons(port);
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">uint8_t</span><span style="color:#f92672">*</span> port_bytes <span style="color:#f92672">=</span> (<span style="color:#66d9ef">uint8_t</span><span style="color:#f92672">*</span>) <span style="color:#f92672">&amp;</span>p;
+</span></span><span style="display:flex;"><span>		request.push_back(port_bytes[<span style="color:#ae81ff">0</span>]);
+</span></span><span style="display:flex;"><span>		request.push_back(port_bytes[<span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		send(sock, request.data(),request.size(), <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">//4. Final Proxy Response
+</span></span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">uint8_t</span> final_res[<span style="color:#ae81ff">10</span>];
+</span></span><span style="display:flex;"><span>		recv(sock, final_res, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span>(final_res[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0x00</span>){
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;[+] Cicuit Spliced. Tunneling to: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> onion_url <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> http_get <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;GET / HTTP/1.1</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">Host: your-onion-site.onion</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">Connection: close</span><span style="color:#ae81ff">\r\n\r\n</span><span style="color:#e6db74">&#34;</span>;
+</span></span><span style="display:flex;"><span>			send(sock, http_get, strlen(http_get), <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span> sock; <span style="color:#75715e">// Socket is now transparently connected to the onion 
+</span></span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		close(sock);
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> sock <span style="color:#f92672">=</span> TorOperator<span style="color:#f92672">::</span>Connect(<span style="color:#e6db74">&#34;duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion&#34;</span>, <span style="color:#ae81ff">80</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span>(sock <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>){
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 2. Prepare the HTTP GET request
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		std<span style="color:#f92672">::</span>string request <span style="color:#f92672">=</span> 
+</span></span><span style="display:flex;"><span>        	<span style="color:#e6db74">&#34;GET / HTTP/1.1</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>        	<span style="color:#e6db74">&#34;Host: duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>        	<span style="color:#e6db74">&#34;User-Agent: Operator-Researcher/1.0</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>        	<span style="color:#e6db74">&#34;Connection: close</span><span style="color:#ae81ff">\r\n\r\n</span><span style="color:#e6db74">&#34;</span>;
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// Send the request
+</span></span></span><span style="display:flex;"><span>		send(sock, request.c_str(), request.length(), <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 4. Receive the response
+</span></span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">char</span> buffer[<span style="color:#ae81ff">4096</span>];
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">int</span> bytes_received <span style="color:#f92672">=</span> recv(sock, buffer, <span style="color:#66d9ef">sizeof</span>(buffer) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span>(bytes_received <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>){
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			buffer[bytes_received] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;\0&#39;</span>;
+</span></span><span style="display:flex;"><span>			std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;--- RESPONSE FOR DARK WEB ---&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>			std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> buffer <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		close(sock);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	}<span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>		std<span style="color:#f92672">::</span>cerr <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;[-] Failed to splice circuit. Is tor.service running?&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div></div>
+
+<h2 class="relative group">Result
+    <div id="result" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#result" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p><strong>The Result
+Running this on my Arch rig produces the following output. Notice the 200 OK—this is the sound of a successful handshake across the shadow network.</strong>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="auto"
+    alt="Terminal Execution Output"
+    width="1141"
+    height="217"
+    src="/operator-blog/posts/dark-web-part-3/tor_connect_hu_f3812c1ff3fe7a41.png"
+    srcset="/operator-blog/posts/dark-web-part-3/tor_connect_hu_f3812c1ff3fe7a41.png 800w, /operator-blog/posts/dark-web-part-3/tor_connect.png 1280w"
+    sizes="(min-width: 768px) 50vw, 65vw"
+    data-zoom-src="/operator-blog/posts/dark-web-part-3/tor_connect.png"><figcaption>Successful SOCKS5 Handshake and HTTP Response</figcaption></figure>
+</p>
+
+
+
+
+
+<div
+  id="accordion-d2b9d77e3a54438e719c73252da54e48"
+  class="border border-neutral-200 dark:border-neutral-700 rounded-lg overflow-hidden"
+  data-accordion="collapse"
+  data-accordion-separated="false"
+>
+    
+
+
+  
+
+
+
+
+
+
+
+
+
+
+<details
+  class="group border-none"
+  data-accordion-item
+  
+>
+  <summary class="flex w-full cursor-pointer items-center justify-between gap-4 px-4 py-3 text-left text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+    <span class="flex items-center gap-2">
+      
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+<path fill="currentColor"  d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3L562.7 256l-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span>
+      
+      <span>View Full Raw Terminal Output</span>
+    </span>
+    <span class="accordion-chevron ms-auto flex h-5 w-5 items-center justify-center print:hidden">
+      <span class="relative block icon"><svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 20 20"
+  fill="currentColor"
+  aria-hidden="true"
+>
+  <path
+    fill-rule="evenodd"
+    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+    clip-rule="evenodd"
+  />
+</svg>
+</span>
+    </span>
+  </summary>
+<div class="px-4 pb-4 text-neutral-700 dark:text-neutral-300">
+    <pre><code>```text
+[+] Circuit Spliced. Tunneling to: duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion
+--- RESPONSE FOR DARK WEB ---
+HTTP/1.1 200 OK
+Server: nginx
+Date: Mon, 04 May 2026 23:25:22 GMT
+Content-Type: text/html; charset=UTF-8
+Content-Length: 164666
+Connection: close
+Vary: Accept-Encoding
+ETag: &quot;69f8ff05-2833a&quot;
+Permissions-Policy: interest-cohort=()
+Content-Security-Policy: default-src 'none' ; connect-src  https://duck.ai https://*.duck.ai https://duckduckgo.com https://*.duckduckgo.com https://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion/ https://spreadprivacy.com ; manifest-src  https://duck.ai https://*.duck.ai https://duckduckgo.com https://*.duckduckgo.com https://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion/ https://spreadprivacy.com ; media-src  https://duck.ai https://*.duck.ai https://duckduckgo.com https://*.duckduckgo.com https://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion/ https://spreadprivacy.com ; script-src blob:  https://duck.ai https://*.duck.ai https://duckduckgo.com https://*.duckduckgo.com https://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion/ https://spreadprivacy.com 'unsafe-inline' 'unsafe-eval' ; font-src data:  https://duck.ai https://*.duck.ai https://duckduckgo.com https://*.duckduckgo.com https://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion/ https://spreadprivacy.com ; img-src data:  https://duck.ai https://*.duck.ai https://duckduckgo.com https://*.duckduckgo.com https://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion/ https://spreadprivacy.com ; style-src  https://duck.ai https://*.duck.ai https://duckduckgo.com https://*.duckduckgo.com https://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion/ https://spreadprivacy.com 'unsafe-inline' ; object-src 'none' ; worker-src blob: ; child-src blob:  https://duck.ai https://*.duck.ai https://duckduckgo.com https://*.duckduckgo.com https://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion/ https://spreadprivacy.com ; frame-src blob:  https://duck.ai https://*.duck.ai https://duckduckgo.com https://*.duckduckgo.com https://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion/ https://spreadprivacy.com ; form-action  https://duck.ai https://*.duck.ai https://duckduckgo.com https://*.duckduckgo.com https://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion/ https://spreadprivacy.com ; frame-ancestors 'self' https://html.duckduckgo.com; base-uri 'self' ; block-all-mixed-content ;
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1;mode=block
+X-Content-Type-Options: nosniff
+Referrer-Policy: origin
+Expect-CT: max-age=0
+Expires: Mon, 04 May 2026 23:25:21 GMT
+Cache-Control: no-cache
+Accept-Ranges: bytes
+
+&lt;!DOCTYPE html&gt;&lt;html lang=&quot;en-US&quot; class=&quot;&quot;&gt;&lt;head&gt;&lt;meta charSet=&quot;utf-8&quot; data-next-head=&quot;&quot;/&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, user-scalable=1 , viewport-fit=auto&quot; data-next-head=&quot;&quot;/&gt;&lt;link rel=&quot;preload&quot; href=&quot;/static-assets/font/ProximaNova-RegIt-webfont.woff2&quot; as=&quot;font&quot; type=&quot;font/woff2&quot; crossorigin=&quot;anonymous&quot; data-next-head=&quot;&quot;/&gt;&lt;link rel=&quot;preconnect&quot; href=&quot;/country.json&quot; data-next-head=&quot;&quot;/&gt;&lt;link rel=&quot;preload&quot; href=&quot;/country.json&quot; as=&quot;fetch&quot; fetchPriority=&quot;high&quot; data-next-head=&quot;&quot;/&gt;&lt;title data-next-head=&quot;&quot;&gt;DuckDuckGo - Protection. Privacy. Peace of mind.&lt;/title&gt;&lt;meta name=&quot;description&quot; content=&quot;The Internet privacy company that empowers you to seamlessly take control of your personal information online, without any tradeoffs.&quot; data-next-head=&quot;&quot;/&gt;&lt;meta name=&quot;twitter:card&quot; content=&quot;summary_large_image&quot; data-next-head=&quot;&quot;/&gt;&lt;meta name=&quot;twitter:site&quot; content=&quot;@duckduckgo&quot; data-next-head=&quot;&quot;/&gt;&lt;meta name=&quot;twitter:title&quot; content=&quot;DuckDuckGo - Protection. Privacy. Peace of mind.&quot; data-next-head=&quot;&quot;/&gt;&lt;meta name=&quot;twitter:description&quot; content=&quot;The Internet privacy company that empowers you to seamlessly take control of your personal information online, without any tradeoffs.&quot; data-next-head=&quot;&quot;/&gt;&lt;meta name=&quot;twitter:image&quot; content=&quot;https://duckduckgo.com/assets/logo_social-media.png&quot; data-next-head=&quot;&quot;/&gt;&lt;meta property=&quot;og:url&quot; content=&quot;https://duckdu
+```
+</code></pre>
+
+  </div>
+</details>
+
+</div>
+
+<style>
+  #accordion-d2b9d77e3a54438e719c73252da54e48 > details + details {
+    border-top: 1px solid rgb(var(--color-neutral-200));
+  }
+  .dark #accordion-d2b9d77e3a54438e719c73252da54e48 > details + details {
+    border-top-color: rgb(var(--color-neutral-700));
+  }
+</style>
+
+<style>
+  #accordion-d2b9d77e3a54438e719c73252da54e48 details[data-accordion-item] > summary .accordion-chevron {
+    transform: rotate(-90deg);
+    transition: transform 200ms ease-in-out;
+  }
+  #accordion-d2b9d77e3a54438e719c73252da54e48 details[data-accordion-item][open] > summary .accordion-chevron {
+    transform: rotate(0deg);
+  }
+</style>
+
+<script>
+  (() => {
+    const root = document.getElementById("accordion-d2b9d77e3a54438e719c73252da54e48");
+    if (!root) return;
+    const items = root.querySelectorAll("details[data-accordion-item]");
+    items.forEach((item) => {
+      item.addEventListener("toggle", () => {
+        if (!item.open) return;
+        items.forEach((other) => {
+          if (other !== item) other.removeAttribute("open");
+        });
+      });
+    });
+  })();
+</script>
+
+
+
+<h2 class="relative group">Trust without Authorities
+    <div id="trust-without-authorities" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#trust-without-authorities" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p>The most powerful part of this identity is the lack of a &ldquo;Middleman.&rdquo;</p>
+<ul>
+<li><strong>Clearnet:</strong> You trust a <strong>Certificate Authority (CA)</strong> like DigiCert to verify that <code>google.com</code> is really Google.</li>
+<li><strong>Dark Web:</strong> The browser <em>verifies the math</em>. If you have the URL, you have the Public Key. If the server can prove it has the Private Key (via a digital signature during the handshake), it <strong>is</strong> the site. No one can steal or spoof your domain without your private key.</li>
+</ul>
+<hr>
+
+<h2 class="relative group">Next in the Series
+    <div id="next-in-the-series" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#next-in-the-series" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p>In the final part, we look at the <strong>Exit Strategy</strong>. Even with perfect math, people get caught. We will dive into <strong>OpSec</strong>, <strong>Traffic Correlation</strong>, and how the &lsquo;Shadow&rsquo; can eventually betray you.</p>
+
+          
+          
+          
+        </div>
+        
+        
+  <details class="mt-2 mb-5 overflow-hidden rounded-lg ms-0 ps-5">
+    
+  <summary
+    class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 -ms-5 ps-5 dark:bg-primary-800 dark:text-neutral-100">
+    Demystifying the Dark Web -
+    This article is part of a series.
+  </summary>
+  
+  
+    
+      <div
+        class="py-1 border-dotted border-neutral-300 border-s-1 -ms-5 ps-5 dark:border-neutral-600">
+        <a href="/operator-blog/posts/dark-web-part1/">
+          Part 1:
+          Demystifying the Dark Web Part 1: The Invisible Iceberg
+        </a>
+      </div>
+    
+  
+    
+      <div
+        class="py-1 border-dotted border-neutral-300 border-s-1 -ms-5 ps-5 dark:border-neutral-600">
+        <a href="/operator-blog/posts/dark-web-part-2/">
+          Part 2:
+          Demystifying the Dark Web Part 2: The Onion Handshake
+        </a>
+      </div>
+    
+  
+    
+      <div
+        class="py-1 border-dotted border-neutral-300 border-s-1 -ms-5 ps-5 dark:border-neutral-600">
+        Part 3:
+        This Article
+      </div>
+    
+  
+    
+      <div
+        class="py-1 border-dotted border-neutral-300 border-s-1 -ms-5 ps-5 dark:border-neutral-600">
+        <a href="/operator-blog/posts/dark-web-part-4/">
+          Part 4:
+          Demystifying the Dark Web Part 4: The Operator&#39;s Grave
+        </a>
+      </div>
+    
+  
+
+
+  </details>
+
+
+        
+
+        
+
+      </div>
+    </section>
+
+    
+    <footer class="pt-8 max-w-prose print:hidden">
+      
+  
+    
+    
+    
+    <div class="pt-8">
+      <hr class="border-dotted border-neutral-300 dark:border-neutral-600">
+      <div class="flex justify-between pt-3">
+        <span class="flex flex-col">
+          
+            <a
+              class="flex text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
+              href="/operator-blog/posts/dark-web-part-4/">
+              <span class="leading-6">
+                <span class="inline-block rtl:rotate-180">&larr;</span>&ensp;Demystifying the Dark Web Part 4: The Operator's Grave
+              </span>
+            </a>
+            
+              <span class="ms-6 mt-1 text-xs text-neutral-500 dark:text-neutral-400">
+                <time datetime="2026-05-04T00:00:00&#43;00:00">May 4, 2026</time>
+              </span>
+            
+          
+        </span>
+        <span class="flex flex-col items-end">
+          
+            <a
+              class="flex text-right text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
+              href="/operator-blog/posts/dark-web-part-2/">
+              <span class="leading-6">
+                Demystifying the Dark Web Part 2: The Onion Handshake&ensp;<span class="inline-block rtl:rotate-180">&rarr;</span>
+              </span>
+            </a>
+            
+              <span class="me-6 mt-1 text-xs text-neutral-500 dark:text-neutral-400">
+                <time datetime="2026-05-04T00:00:00&#43;00:00">May 4, 2026</time>
+              </span>
+            
+          
+        </span>
+      </div>
+    </div>
+  
+
+
+      
+    </footer>
+  </article>
+
+        
+
+
+  
+
+
+
+
+
+
+<div
+  id="scroll-to-top"
+  class="fixed bottom-6 end-6 z-50 transform translate-y-4 opacity-0 duration-200">
+  <a
+    href="#the-top"
+    class="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
+    aria-label="Scroll to top"
+    title="Scroll to top">
+    &uarr;
+  </a>
+</div>
+
+      </main><footer id="site-footer" class="py-10 print:hidden">
+  
+  
+    
+  
+  <div class="flex items-center justify-between">
+    
+    
+      <p class="text-sm text-neutral-500 dark:text-neutral-400">
+          &copy;
+          2026
+          Sneferu
+      </p>
+    
+
+    
+    
+      <p class="text-xs text-neutral-500 dark:text-neutral-400">
+        
+        
+        Powered by <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+          href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a> &amp; <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+          href="https://blowfish.page/" target="_blank" rel="noopener noreferrer">Blowfish</a>
+      </p>
+    
+  </div>
+  
+    <script>
+      mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
+        margin: 24,
+        background: "rgba(0,0,0,0.5)",
+        scrollOffset: 0,
+      });
+    </script>
+  
+  
+  
+</footer>
+<div
+  id="search-wrapper"
+  class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh] z-500"
+  data-url="http://localhost:1313/operator-blog/">
+  <div
+    id="search-modal"
+    class="flex flex-col w-full max-w-3xl min-h-0 mx-auto border rounded-md shadow-lg top-20 border-neutral-200 bg-neutral dark:border-neutral-700 dark:bg-neutral-800">
+    <header class="relative z-10 flex items-center justify-between flex-none px-2">
+      <form class="flex items-center flex-auto min-w-0">
+        <div class="flex items-center justify-center w-8 h-8 text-neutral-400">
+          <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span>
+        </div>
+        <input
+          type="search"
+          id="search-query"
+          class="flex flex-auto h-12 mx-1 bg-transparent appearance-none focus:outline-dotted focus:outline-2 focus:outline-transparent"
+          placeholder="Search"
+          tabindex="0">
+      </form>
+      <button
+        id="close-search-button"
+        class="flex items-center justify-center w-8 h-8 text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
+        title="Close (Esc)">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+</span>
+      </button>
+    </header>
+    <section class="flex-auto px-2 overflow-auto">
+      <ul id="search-results">
+        
+      </ul>
+    </section>
+  </div>
+</div>
+
+    </div>
+  </body>
+  
+</html>
